@@ -1,8 +1,8 @@
-export const Profile = ({ name, registerAt }) => {
+export const Profile = (props) => {
     return (
         <>
-            <p>Привет, <b>{name}</b> </p>
-            <p>Дата регистрации: {registerAt.toLocaleDateString()}</p>
+            <p>Привет, <b>{props.name || 'Аноним'}</b> </p>
+            <p>Дата регистрации: {props.registerAt.toLocaleDateString()}</p>
         </>
     )
 }
