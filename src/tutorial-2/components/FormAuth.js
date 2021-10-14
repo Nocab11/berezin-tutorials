@@ -5,8 +5,8 @@ export const FormAuth = () => {
 
     function handlerSubmit(e) {
         e.preventDefault();
-        if ((email.length && password.length) === 0) {
-            alert('Заполните все поля')
+        if (!email || !password) {
+            alert('Все поля должны быть заполнены!');
         } else {
             console.log({email, password})
             email = '';
@@ -17,9 +17,9 @@ export const FormAuth = () => {
 
     function handlerChange(event) {
         if (event.target.name === 'email') {
-            email = event.target.value
+            email = event.target.value.trim()
         } else if (event.target.name === 'password') {
-            password = event.target.value
+            password = event.target.value.trim()
         }
     }
 
