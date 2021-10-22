@@ -5,6 +5,8 @@ import { Phrase } from "./components/Phrase";
 
 const App = () => {
 
+    const [phrase, setPhrase] = useState([]);
+
     const adjectivesArr = [
         "абсолютный",
         "адский",
@@ -58,12 +60,12 @@ const App = () => {
         return arr[getRandomInt(0, arr.length - 1)];
     };
 
-    const [phrase, setPhrase] = useState([]);
-
     const addPhrase = () => {
-        const adjective = random(adjectivesArr);
+        const adjective1 = random(adjectivesArr);
+        const adjective2 = random(adjectivesArr);
         const noun = random(nounsArr);
-        setPhrase([adjective, noun])
+        const newPhrase = `${adjective1} ${adjective2} ${noun}`;
+        setPhrase([...phrase, newPhrase])
     };
 
     const removePhrase = () => {
