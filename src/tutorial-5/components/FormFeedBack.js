@@ -1,15 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-export const FormFeedBack = ({ field, setField, comments, setComments }) => {
+export const FormFeedBack = ({ addComment }) => {
+
+    const [arrComments, setArrComments] = useState([]);
+
+    const [comments, setComments] = useState({
+        name: '',
+        email: '',
+        createdAt: Date(),
+        text: ''
+    });
 
     const handlerSubmit = (e) => {
         e.preventDefault();
-        setField([...field, comments])
-        e.target.reset();
-        setComments({name: '', email: '', text: '' });
+        if (!comments.name || !comments.email || !comments.text) {
+            alert('Все поля должны быть заполнены!');
+        } else {
+            setArrComments([...arrComments, comments])
+            if (addComment) {
+                addComment(comments);
+                setComments({ name: '', email: '', createdAt: Date(), text: '' });
+            }
+            e.target.reset();
+        }
     }
 
     const handlerChange = (e) => {
