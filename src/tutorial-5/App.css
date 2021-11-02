@@ -1,0 +1,12 @@
+.form-auth {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px auto;
+}
+.form-auth__item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
