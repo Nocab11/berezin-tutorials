@@ -8,7 +8,9 @@ const App = () => {
 
     const isPost = pathname.includes('post');
 
-    const postId = pathname.split('/');
+    const postArray = pathname.split('/');
+
+    const postId = postArray[postArray.length - 1];
 
     return (
         <>

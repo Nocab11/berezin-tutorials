@@ -4,7 +4,7 @@ export const Article = ({ id }) => {
     return (
         <article>
             <div>
-                <h1>Статья № {id[id.length - 1]}</h1>
+                <h1>Статья № {id}</h1>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae distinctio fuga animi
                     aliquam sit id veritatis, doloribus ducimus quas, dignissimos non minima quia amet possimus?
