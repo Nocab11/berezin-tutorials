@@ -1,12 +1,56 @@
 import React from "react";
-import { Nav, Navbar, Row, Col, Card } from "react-bootstrap";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+
+
 import { Article } from "./components/Article";
+import { Home } from "./pages/Home";
+import { About } from "./pages/About";
+import { Footer } from "./components/Footer";
+import { Header}  from "./components/Header";
+
+// const Router = ({ path, children, exact }) => {
+//
+//     const { pathname } = window.location;
+//
+//     console.log('path', path)
+//
+//     if (exact) {
+//         if (pathname === path) {
+//             return children;
+//         }
+//     } else {
+//         if (pathname.includes(path)) {
+//             return children;
+//         }
+//     }
+//
+//     return null;
+//
+// }
+
+const ProtectedRoute = ({ path, children }) => {
+    const token = window.localStorage.getItem('token');
+
+    console.log(token)
+
+    return (
+        <Routes>
+            <Route path={path} render={() => {
+                if (token) {
+                    return children;
+                } else {
+                    return <Navigate to="/404" />
+                }
+            }}
+            />;
+        </Routes>
+
+    )
+}
 
 const App = () => {
 
     const { pathname } = window.location;
-
-    const isPost = pathname.includes('post');
 
     const postArray = pathname.split('/');
 
@@ -14,59 +58,18 @@ const App = () => {
 
     return (
         <>
-            <header>
-                <h2>
-                    <a href="/">React Blog</a>
-                </h2>
-                <Nav variant="pills" defaultActiveKey="/">
-                    <Nav.Item>
-                        <Nav.Link eventKey="/home" to="/">
-                            Главная
-                        </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="/home" to="/about">
-                            Обо мне
-                        </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="/home" to="/profile">
-                            Профиль
-                        </Nav.Link>
-                    </Nav.Item>
-                </Nav>
-            </header>
-            {pathname === "/" && (
-                <Row xs={1} md={3} className="g-4">
-                    <Col>
-                        <Card>
-                            <Card.Img variant="top" src="https://via.placeholder.com/150x150" />
-                            <Card.Body>
-                                <Card.Title>
-                                    <a href="/post/1">Card title</a>
-                                </Card.Title>
-                                <Card.Text>
-                                    This is a longer card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            )}
-            {/* ТУТ ДОПИСАТЬ РОУТ НА ПОЛНУЮ ЗАПИСЬ */}
-            {isPost && (
-                <Article id={postId} />
-            )}
-            {pathname === "/about" && (
-                <Card>
-                    <Card.Body>Это мой личный сайт!</Card.Body>
-                </Card>
-            )}
-            <br />
-            <Navbar bg="light" style={{ paddingLeft: 20 }}>
-                <Navbar.Brand href="#home">My site (c) 2021</Navbar.Brand>
-            </Navbar>
+            <Header />
+
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/post/:id" element={<Article id={postId} />} exact />
+                <Route path="/about" element={<About />} />
+                <Route path="/test" element={<h1>Test post</h1>} />
+                <Route path ="/profile" element={<ProtectedRoute path="/profile"><h2>Это защищенная страница</h2></ProtectedRoute>} />
+
+                <Route path="*" element={<h1 style={{ textAlign: 'center'}}>Страница отсутствует</h1>} />
+            </Routes>
+            <Footer />
         </>
     );
 }

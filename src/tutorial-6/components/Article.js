@@ -1,6 +1,12 @@
 import React from 'react';
+import { useParams } from "react-router-dom";
 
-export const Article = ({ id }) => {
+export const Article = () => {
+
+    const { id } = useParams();
+
+
+
     return (
         <article>
             <div>
