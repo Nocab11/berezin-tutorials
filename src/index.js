@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './tutorial-form/App';
+import App from './tutorial-7/App';
 import { BrowserRouter } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
