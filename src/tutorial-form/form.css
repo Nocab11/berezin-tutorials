@@ -1,0 +1,12 @@
+.form-ui {
+    padding: 40px;
+}
+.form-ui__item {
+    display: flex;
+}
+.form-ui__textfield {
+    margin: 0 15px 0 0 !important;
+}
+.btn-primary {
+    margin-right: 15px !important;
+}
